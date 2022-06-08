@@ -4,8 +4,6 @@ import '../../../app_theme.dart';
 import '../../../jgo_home.dart';
 import '../../../jgo_home_profile.dart';
 import 'live_chat_page_screen.dart';
-//enum Menu { itemOne, itemTwo }
-//doi thanh appbar de dung popup menu
 
 class HelpCenterPageScreen extends StatefulWidget {
   const HelpCenterPageScreen({Key? key}) : super(key: key);
@@ -17,7 +15,6 @@ class HelpCenterPageScreen extends StatefulWidget {
 late TextEditingController _searchController = TextEditingController();
 final ScrollController _scrollController = ScrollController();
 final List<Widget> _messages = <Widget>[];
-//String _selectedMenu = '';
 
 class _HelpCenterPageScreenState extends State<HelpCenterPageScreen> {
   @override

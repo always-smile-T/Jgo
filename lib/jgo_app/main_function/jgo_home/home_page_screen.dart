@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jgo_exe/jgo_app/app_theme.dart';
 import 'package:jgo_exe/jgo_app/main_function/jgo_home/post/create_new_post.dart';
+import 'package:jgo_exe/jgo_app/main_function/jgo_home/post/post_detail_screen.dart';
 
 
 class HomePageScreen extends StatefulWidget {
@@ -97,7 +99,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                   margin: const EdgeInsets.all(5),
                   color: AppTheme.greenPrimary,
                   child: Container(
-                    height: 165,
+                    height: 180,
                     margin: const EdgeInsets.all(5),
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
@@ -105,9 +107,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                       borderRadius: BorderRadius.circular(10),),
                     child:Column(
                           children: [
-                            Expanded(
-                              flex: 1,
-                              child: Row(
+                              Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(post[index].postTitle, style: const TextStyle(
@@ -137,48 +137,87 @@ class _HomePageScreenState extends State<HomePageScreen>
                                   ],
                                 ),
                               ],
-                            ),),
-                            Expanded(
-                              flex: 3,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(post[index].postContent, style: const TextStyle(
-                                      fontSize: 14, color: Colors.black,
-                                  ),),
-                                  TextButton(
-                                      onPressed: (){},
-                                      child: const Text('View more', style: TextStyle(color: AppTheme.greenPrimary, fontSize: 14),))
-                                ],
-                              )),
-                             Expanded(
-                              flex: 1,
-                                child:
-                                 Row(
+                            ),
+                            const Divider(
+                              color: AppTheme.greenPrimary,
+                              height: 2,
+                              thickness: 1.5,
+                              // indent: 5,
+                              endIndent: 150,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Divider(
+                              color: AppTheme.greenPrimary,
+                              height: 2,
+                              thickness: 1.5,
+                              indent: 250,
+                              // endIndent: 5,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            SizedBox(
+                              height: 40,
+                              child: Text(post[index].postContent, style: const TextStyle(
+                                fontSize: 14, color: Colors.black,
+                              ),),
+                            ),
+                             Row(
+                               mainAxisAlignment: MainAxisAlignment.start,
+                               children: [
+                                 TextButton(
+                                     onPressed: (){
+                                       if(post[index].postId == '9'){
+                                         Navigator.of(context).pushAndRemoveUntil(
+                                             MaterialPageRoute(
+                                                 builder: (BuildContext context) =>
+                                                 const PostDetailScreen()),
+                                                 (route) => false);
+                                       }
+                                     },
+                                     child: const Text('View more',
+                                       style: TextStyle(color: AppTheme.greenPrimary, fontSize: 14),)),
+                               ],
+                             ),
+                            const Divider(
+                              color: AppTheme.greenPrimary,
+                              height: 2,
+                              thickness: 0.5,
+                              //indent: 250,
+                              // endIndent: 5,
+                            ),
+                            Row(
                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                    children: [
                                      Row(
                                        children: [
-                                         IconButton(
+                                         SizedBox(
+                                           height: 34,
+                                           width: 34,
+                                           child: IconButton(
                                              onPressed: () {
                                                setState(() {
                                                  post[index].liked = !post[index].liked;
                                                });
                                              },
                                              icon:  Image.asset(post[index].liked ? "assets/images/star1.png" : "assets/images/star.png"),),
-                                         Text(post[index].star, style: const TextStyle(color: AppTheme.greenPrimary),)
+                                         ),
+                                         Text(post[index].liked ? (post[index].star).toString() : (post[index].star - 1).toString(), style: const TextStyle(color: AppTheme.greenPrimary),)
                                        ],
                                      ),
                                      Row(
                                        children: [
                                          Image.asset("assets/images/comment.png"),
+                                         const SizedBox(
+                                           width: 5,
+                                         ),
                                          Text(post[index].cmt, style: const TextStyle(color: AppTheme.greenPrimary),)
                                        ],
                                      )
                                    ],
                                  )
-                            )
                           ],
                         )
                   ),
@@ -316,24 +355,25 @@ class _HomePageScreenState extends State<HomePageScreen>
                   );
   }
   List<ThePost> post = [ // list message demo
-    ThePost(postContent: "日本では国民的な知名度があり、登場キャラクタ...", postTitle: 'ドラえもん',avatar: 'assets/images/anna.png',name: 'Anna',star: '397',cmt: '41', liked: true),
-    ThePost(postContent: "向けSF漫画。1969年から小学館の雑誌で連載された。日本では国...", postTitle: 'ネコ（猫）',avatar: 'assets/images/yamada.png',name: 'Yamada',star: '72',cmt: '18',liked: false),
-    ThePost(postContent: "「おかずは、気持ちがあれば何でもかまいません。」 しんこ ...", postTitle: '戯け話',avatar: 'assets/images/robin.png',name: 'Robin',star: '1002',cmt: '332',liked: true),
-    ThePost(postContent: "私は恐れていました。 するとすぐに別の子供が「私も」と言いました。···", postTitle: '短い足',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: '21',cmt: '10',liked: false),
-    ThePost(postContent: "中学生の運動会の話。4人でも200メートルや80メートル走ろう ...", postTitle: '短い足',avatar: 'assets/images/anna.png',name: 'Anna',star: '133',cmt: '13',liked: false),
-    ThePost(postContent: "夫は妻に、私たちが新婚の朝に寝坊したので、お弁当を急いで作っ ...", postTitle: '戯け話',avatar: 'assets/images/yamada.png',name: 'Yamada',star: '55',cmt: '12',liked: true),
-    ThePost(postContent: "ブレインストーミング（英: brainstorming）あるいはブレイ ...", postTitle: 'ブレインストーミング',avatar: 'assets/images/robin.png',name: 'Robin',star: '887',cmt: '54',liked: true),
-    ThePost(postContent: "ネコ（猫）は、狭義には食肉目ネコ科ネコ属に分類されるリビアヤ ...", postTitle: 'ネコ（猫）',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: '121',cmt: '23',liked: false),
-    ThePost(postContent: "『ドラえもん』は、藤子・F・不二雄による日本の児童向けSF漫画。...", postTitle: 'ドラえもん',avatar: 'assets/images/anna.png',name: 'Anna',star: '434',cmt: '46',liked: true),
+    ThePost(postId: '1',postContent: "日本では国民的な知名度があり、登場キャラクタ...", postTitle: 'ドラえもん',avatar: 'assets/images/anna.png',name: 'Anna',star: 397,cmt: '41', liked: true),
+    ThePost(postId: '2',postContent: "向けSF漫画。1969年から小学館の雑誌で連載された。日本では国...", postTitle: 'ネコ（猫）',avatar: 'assets/images/yamada.png',name: 'Yamada',star: 72,cmt: '18',liked: false),
+    ThePost(postId: '3',postContent: "「おかずは、気持ちがあれば何でもかまいません。」 しんこ ...", postTitle: '戯け話',avatar: 'assets/images/robin.png',name: 'Robin',star: 1002,cmt: '332',liked: true),
+    ThePost(postId: '4',postContent: "私は恐れていました。 するとすぐに別の子供が「私も」と言いました。···", postTitle: '短い足',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: 21,cmt: '10',liked: false),
+    ThePost(postId: '5',postContent: "中学生の運動会の話。4人でも200メートルや80メートル走ろう ...", postTitle: '短い足',avatar: 'assets/images/anna.png',name: 'Anna',star: 133,cmt: '13',liked: false),
+    ThePost(postId: '6',postContent: "夫は妻に、私たちが新婚の朝に寝坊したので、お弁当を急いで作っ ...", postTitle: '戯け話',avatar: 'assets/images/yamada.png',name: 'Yamada',star: 55,cmt: '12',liked: true),
+    ThePost(postId: '7',postContent: "ブレインストーミング（英: brainstorming）あるいはブレイ ...", postTitle: 'ブレインストーミング',avatar: 'assets/images/robin.png',name: 'Robin',star: 887,cmt: '54',liked: true),
+    ThePost(postId: '8',postContent: "ネコ（猫）は、狭義には食肉目ネコ科ネコ属に分類されるリビアヤ ...", postTitle: 'ネコ（猫）',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: 121,cmt: '23',liked: false),
+    ThePost(postId: '9',postContent: "『ドラえもん』は、藤子・F・不二雄による日本の児童向けSF漫画。...", postTitle: 'ドラえもん',avatar: 'assets/images/anna.png',name: 'Anna',star: 434,cmt: '46',liked: true),
   ];
 }
 class ThePost{ //component dor chat message demo
+  String postId;
   String postContent;
   String postTitle;
   String avatar;
   String name;
-  String star;
+  int star;
   String cmt;
   bool liked;
-  ThePost({required this.postContent, required this.postTitle,required this.avatar,required this.name,required this.star,required this.cmt,required this.liked});
+  ThePost({required this.postId,required this.postContent, required this.postTitle,required this.avatar,required this.name,required this.star,required this.cmt,required this.liked});
 }
