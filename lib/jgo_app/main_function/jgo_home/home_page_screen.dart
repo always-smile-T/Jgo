@@ -143,7 +143,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                               height: 2,
                               thickness: 1.5,
                               // indent: 5,
-                              endIndent: 150,
+                              endIndent: 180,
                             ),
                             const SizedBox(
                               height: 5,

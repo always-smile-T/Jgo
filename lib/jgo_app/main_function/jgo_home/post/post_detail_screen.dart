@@ -18,6 +18,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
   int trans = 0;
   final List<Widget> _messages = <Widget>[];
   late TextEditingController _messageController = TextEditingController();
+  int count = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +143,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                                         const SizedBox(
                                           width: 5,
                                         ),
-                                        Text(post[index].cmt.toString(), style: const TextStyle(color: AppTheme.greenPrimary),)
+                                        Text((post[index].cmt + count).toString(), style: const TextStyle(color: AppTheme.greenPrimary),)
                                       ],
                                     ),
                                   ],
@@ -330,6 +331,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                                       ),
                                     ));
                                 _messageController = TextEditingController(text: '');
+                                count = count + 1;
                               } else {
                                 //do nothing
                               }
