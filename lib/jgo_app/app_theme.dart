@@ -14,6 +14,11 @@ class AppTheme {
   static const Color redDiamond = Color(0xFFE23C3C);
   static const Color background = Color(0xFFF2F3F8);
   static const Color greyblock = Color(0xFFC4C4C4);
+  static const Color tagN5 = Color(0xFFFDE566);
+  static const Color tagN4 = Color(0xFFFFB84E);
+  static const Color tagN3 = Color(0xFFFF9900);
+  static const Color tagN2 = Color(0xFFFF5933);
+  static const Color tagN1 = Color(0xFFFD2E00);
 
 
 

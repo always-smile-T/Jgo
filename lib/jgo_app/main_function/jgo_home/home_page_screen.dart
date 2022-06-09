@@ -241,7 +241,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                 margin: const EdgeInsets.all(5),
                 color: AppTheme.greenPrimary,
                 child: Container(
-                    height: 180,
+                    height: 160,
                     margin: const EdgeInsets.all(5),
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
