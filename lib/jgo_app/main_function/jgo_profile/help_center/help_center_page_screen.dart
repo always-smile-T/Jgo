@@ -73,25 +73,7 @@ class _HelpCenterPageScreenState extends State<HelpCenterPageScreen> {
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                       const LiveChatScreen()),
-                                      (route) => false);
-                              /*PopupMenuButton<Menu>(
-                        // Callback that sets the selected popup menu item.
-                          onSelected: (Menu item) {
-                           /* setState(() {
-                              _selectedMenu = item.name ;
-                            });*/
-                          },
-                          itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
-                            const PopupMenuItem<Menu>(
-                              value: Menu.itemOne,
-                              child: Text('Item 1'),
-                            ),
-                            const PopupMenuItem<Menu>(
-                              value: Menu.itemTwo,
-                              child: Text('Item 2'),
-                            ),
-                          ]);*/
-                            }, // dung droplist
+                                      (route) => false); }, 
                             icon: Image.asset("assets/images/more_options.png")),
                       ],
                     ),

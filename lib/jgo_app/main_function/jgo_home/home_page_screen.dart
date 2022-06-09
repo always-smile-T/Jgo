@@ -20,13 +20,11 @@ class _HomePageScreenState extends State<HomePageScreen>
   String? idFolder = "";
   String? search = "";
   Animation<double>? topBarAnimation;
-  static const int count = 9;
   final ScrollController _scrollController = ScrollController();
   final List<Widget> _post = <Widget>[];
   bool _setState = true;
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
-  final TextEditingController _searchController = TextEditingController();
   double topBarOpacity = 0.0;
 
   @override
@@ -88,7 +86,7 @@ class _HomePageScreenState extends State<HomePageScreen>
           // first tab bar view widget
           SingleChildScrollView(child:
           ListView.builder(
-            itemCount: post.length + _post.length,
+            itemCount: post.length,
             controller: _scrollController,
             padding: const EdgeInsets.fromLTRB(10, 150, 10, 70),
             reverse: true,
@@ -225,10 +223,120 @@ class _HomePageScreenState extends State<HomePageScreen>
             },
           ),
           ),
-          const Flexible(
-              child: Center(
-                child: Text("there no story at all"),
-              )
+          SingleChildScrollView(child:
+          GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 20,
+            ),
+            itemCount: story.length,
+            controller: _scrollController,
+            padding: const EdgeInsets.fromLTRB(10, 150, 10, 70),
+            //reverse: true,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index){
+              return Container(
+                margin: const EdgeInsets.all(5),
+                color: AppTheme.greenPrimary,
+                child: Container(
+                    height: 180,
+                    margin: const EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: AppTheme.green3,
+                      borderRadius: BorderRadius.circular(10),),
+                    child:Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(story[index].name, style: const TextStyle(
+                                fontSize: 12
+                            ),),
+                            const SizedBox(width: 10,),
+                            SizedBox(
+                              width: 25,
+                              height: 25,
+                              child: CircleAvatar(
+                                radius: 45,
+                                backgroundImage:
+                                AssetImage(story[index].avatar),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                Text(story[index].storyTitle, overflow: TextOverflow.ellipsis, style: const TextStyle(
+                                    fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold
+                                ),),
+                                Text(story[index].titleE, overflow: TextOverflow.ellipsis, style: const TextStyle(
+                                    fontSize: 12, color: Colors.black
+                                ),),
+                              ],
+                            ),
+                            Text(story[index].author, overflow: TextOverflow.ellipsis, style: const TextStyle(
+                                fontSize: 14, color: Colors.black, fontWeight: FontWeight.w400
+                            ),),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  height: 30,
+                                  child: Image.asset(story[index].unlocked ? 'assets/images/unlocked.png' : 'assets/images/lock.png'),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                        const Divider(
+                          color: AppTheme.greenPrimary,
+                          height: 2,
+                          thickness: 0.5,
+                          //indent: 250,
+                          // endIndent: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(
+                                  height: 34,
+                                  width: 34,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        story[index].liked = !story[index].liked;
+                                      });
+                                    },
+                                    icon:  Image.asset(story[index].liked ? "assets/images/star1.png" : "assets/images/star.png"),),
+                                ),
+                                Text(story[index].liked ? (story[index].star).toString() : (story[index].star - 1).toString(), style: const TextStyle(color: AppTheme.greenPrimary),)
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Image.asset("assets/images/comment.png"),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(story[index].cmt, style: const TextStyle(color: AppTheme.greenPrimary),)
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    )
+                ),
+              );
+            },
+          ),
           ), // second tab bar view widget
         ],
       ),
@@ -313,8 +421,8 @@ class _HomePageScreenState extends State<HomePageScreen>
                                 const SizedBox(height: 5,),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: const[
-                                    SizedBox(
+                                  children: [
+                                   const SizedBox(
                                       height: 27,
                                       width: 27,
                                       child: CircleAvatar(
@@ -323,10 +431,10 @@ class _HomePageScreenState extends State<HomePageScreen>
                                         AssetImage("assets/images/shizuka.png"),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
-                                    Text("Do you have any posts to share?", style: TextStyle(fontWeight: FontWeight.bold,
+                                    Text(_setState ? "Do you have any post to share?" : "Search story", style: const TextStyle(fontWeight: FontWeight.bold,
                                         fontSize: 12, color: AppTheme.greenPrimary))
                                   ],
                                 ),
@@ -334,11 +442,13 @@ class _HomePageScreenState extends State<HomePageScreen>
                               ],
                             ),
                             onPressed: (){
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                      const CreatePostScreen()),
-                                      (route) => false);
+                              if(_setState == true) {
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                        const CreatePostScreen()),
+                                        (route) => false);
+                              }
                             },
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<
@@ -365,6 +475,17 @@ class _HomePageScreenState extends State<HomePageScreen>
     ThePost(postId: '8',postContent: "ネコ（猫）は、狭義には食肉目ネコ科ネコ属に分類されるリビアヤ ...", postTitle: 'ネコ（猫）',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: 121,cmt: '23',liked: false),
     ThePost(postId: '9',postContent: "『ドラえもん』は、藤子・F・不二雄による日本の児童向けSF漫画。...", postTitle: 'ドラえもん',avatar: 'assets/images/anna.png',name: 'Anna',star: 434,cmt: '46',liked: true),
   ];
+  List<TheStory> story = [ // list message demo
+    TheStory(storyId: '1',author: 'Tetsuko Kuroyanagi',storyTitle: "窓ぎわのトットちゃん", titleE: '(Totto-Chan: The little girl at the window)',avatar: 'assets/images/yamada.png',name: 'Yamada',star: 456,cmt: '198', liked: true, unlocked: true),
+    TheStory(storyId: '2',author: 'Kobo Abe',storyTitle: "砂の女", titleE: '(The Woman In The Dunes)',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: 397,cmt: '52', liked: true, unlocked: true),
+    TheStory(storyId: '3',author: 'Tetsuko Kuroyanagi',storyTitle: "窓ぎわのトットちゃん", titleE: '(Totto-Chan: The little girl at the window)',avatar: 'assets/images/anna.png',name: 'Anna',star: 5211,cmt: '912', liked: true, unlocked: true),
+    TheStory(storyId: '4',author: 'Haruki Murakami',storyTitle: "スプートニック", titleE: '(The Sputnik Sweetheart)',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: 1008,cmt: '112', liked: false, unlocked: false),
+    TheStory(storyId: '5',author: 'Haruki Murakami',storyTitle: "1Q84", titleE: '1Q84',avatar: 'assets/images/anna.png',name: 'Anna',star: 456,cmt: '198', liked: true, unlocked: true),
+    TheStory(storyId: '6',author: 'Kobo Abe',storyTitle: "砂の女", titleE: '(The Woman In The Dunes)',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: 397,cmt: '52', liked: false, unlocked: false),
+    TheStory(storyId: '7',author: 'Tetsuko Kuroyanagi',storyTitle: "窓ぎわのトットちゃん", titleE: '(Totto-Chan: The little girl at the window)',avatar: 'assets/images/anna.png',name: 'Anna',star: 5211,cmt: '912', liked: true, unlocked: true),
+    TheStory(storyId: '8',author: 'Haruki Murakami',storyTitle: "スプートニック", titleE: '(The Sputnik Sweetheart)',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: 1008,cmt: '112', liked: false, unlocked: false),
+    TheStory(storyId: '9',author: 'Haruki Murakami',storyTitle: "ノルウェーの森", titleE: '(Norwegian Wood)',avatar: 'assets/images/robin.png',name: 'Robin',star: 526,cmt: '87', liked: true, unlocked: false),
+    TheStory(storyId: '10',author: 'Haruki Murakami',storyTitle: "1Q84", titleE: '1Q84',avatar: 'assets/images/yamada.png',name: 'Yamada',star: 321,cmt: '40', liked: false, unlocked: false),];
 }
 class ThePost{ //component dor chat message demo
   String postId;
@@ -376,4 +497,17 @@ class ThePost{ //component dor chat message demo
   String cmt;
   bool liked;
   ThePost({required this.postId,required this.postContent, required this.postTitle,required this.avatar,required this.name,required this.star,required this.cmt,required this.liked});
+}
+class TheStory{ //component dor chat message demo
+  String storyId;
+  String titleE;
+  String storyTitle;
+  String avatar;
+  String name;
+  int star;
+  String cmt;
+  bool liked;
+  bool unlocked;
+  String author;
+  TheStory({required this.storyId,required this.titleE, required this.storyTitle,required this.avatar,required this.name,required this.star,required this.cmt,required this.liked,required this.unlocked,required this.author});
 }
