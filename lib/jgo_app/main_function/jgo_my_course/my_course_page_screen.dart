@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jgo_exe/jgo_app/app_theme.dart';
-import 'package:jgo_exe/jgo_app/main_function/jgo_home/post/post_detail_screen.dart';
+import 'package:jgo_exe/jgo_app/main_function/jgo_course/course_detail.dart';
 
 
 class MyCourseScreen extends StatefulWidget {
@@ -21,7 +21,6 @@ class _MyCourseScreenState extends State<MyCourseScreen>
   Animation<double>? topBarAnimation;
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _searchController = TextEditingController();
-  bool _setState = true;
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
   double topBarOpacity = 0.0;
@@ -164,8 +163,8 @@ class _MyCourseScreenState extends State<MyCourseScreen>
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text('Top Choices', style: TextStyle(
+                  children: const [
+                     Text('Top Choices', style: TextStyle(
                         fontSize: 26, fontWeight: FontWeight.w700
                     ),
                     ),
@@ -173,67 +172,33 @@ class _MyCourseScreenState extends State<MyCourseScreen>
                 ),
                 SizedBox(
                   height: 180,
-                  child: GridView.builder(
-                    gridDelegate:
-                    const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 180,
-                        childAspectRatio: 1,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 10),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: course.length,
-                    controller: _scrollController,
-                    padding: const EdgeInsets.only(top: 10),
-                    //reverse: true,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: const EdgeInsets.all(10),
-                        height: 120,
-                        width: 90,
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              course[index].bgImg,
-                              height: 90,
-                              width: 90,
-                            ),
-                            SizedBox(
-                              width: 90,
-                              child: Text(
-                                course[index].content,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12, ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            Container(
-                              padding:const EdgeInsets.only(top: 5),
-                              width: 90,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 25,
-                                    color: course[index].colorT1,
-                                    child: Text(course[index].nameT1, textAlign: TextAlign.center),
-                                  ),
-                                  Container(
-                                    width: 65,
-                                    color: Colors.white,
-                                    child: Text(course[index].nameT2, textAlign: TextAlign.center,
-                                      style: const TextStyle(color: AppTheme.tagN5), ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                    //children:  UnmodifiableListView(_messages),
-                  ),
+                    child: GridView.count(
+                      scrollDirection: Axis.horizontal,
+                      crossAxisCount: 1,
+                      primary: false,
+                      children: <Widget>[
+                        _buildCourse('This is the first course of Learning Japanese N5. In this course, you will learn vocabulary with topics: Country. Furthermore, you learn the grammar N5 in this course.',
+                            'Learning Japanese N5 1' , 'N5', 'Country', 'assets/images/j8.png', AppTheme.tagN5 , false,context),
+                        _buildCourse('This is the second course of Learning Japanese N5. In this course, you will learn vocabulary with topics: People. Furthermore, you learn the grammar N5 in this course.',
+                            'Learning Japanese N5 2' , 'N5', 'People', 'assets/images/j1.png', AppTheme.tagN5 , false,context),
+                        _buildCourse('This is the first course of Learning Japanese N4. In this course, you will learn vocabulary with topics: Number and The Week. Furthermore, you learn the grammar N4 in this course.',
+                            'Learning Japanese N4 1' , 'N4', 'Number', 'assets/images/j9.png', AppTheme.tagN4 ,true, context),
+                        _buildCourse('This is the second course of Learning Japanese N4. In this course, you will learn vocabulary with topics: The Week. Furthermore, you learn the grammar N4 in this course.',
+                            'Learning Japanese N4 2' , 'N4', 'Week', 'assets/images/j3.png', AppTheme.tagN4 , true, context),
+                        _buildCourse('...updating',
+                            'Learning Japanese N3 1' , 'N3', 'Number', 'assets/images/j4.png', AppTheme.tagN3 , false,context),
+                        _buildCourse('...updating',
+                            'Learning Japanese N2 1' , 'N2', 'Week', 'assets/images/j5.png', AppTheme.tagN2 , true, context),
+                        _buildCourse('...updating',
+                            'Learning Japanese N1 1' , 'N1', 'Country', 'assets/images/j10.png', AppTheme.tagN1 ,false, context),
+                        _buildCourse('...updating',
+                            'Learning Japanese N3 1' , 'N3', 'People', 'assets/images/j6.png', AppTheme.tagN3 , false,context),
+                        _buildCourse('...updating',
+                            'Learning Japanese N2 1' , 'N2', 'People', 'assets/images/j7.png', AppTheme.tagN2 ,false, context),
+                        _buildCourse('...updating',
+                            'Learning Japanese N1 2', 'N1', 'Week', 'assets/images/j2.png', AppTheme.tagN1 , true, context),
+                      ],
+                    ),
                 )
               ],
             ),
@@ -310,18 +275,66 @@ class _MyCourseScreenState extends State<MyCourseScreen>
         )
     );
   }
-  List<TheCourses> course = [ // list message demo
-    TheCourses(courseId: '1', content: 'Learning \nJapanese N5 1', bgImg: 'assets/images/j8.png',liked: false, nameT1: 'N5', nameT2: 'Country', colorT1: AppTheme.tagN5),
-    TheCourses(courseId: '2', content: 'Learning \nJapanese N5 2', bgImg: 'assets/images/j1.png',liked: false, nameT1: 'N5', nameT2: 'People', colorT1: AppTheme.tagN5),
-    TheCourses(courseId: '3', content: 'Learning \nJapanese N4 1', bgImg: 'assets/images/j9.png',liked: true, nameT1: 'N4', nameT2: 'Number', colorT1: AppTheme.tagN4),
-    TheCourses(courseId: '4', content: 'Learning \nJapanese N4 2', bgImg: 'assets/images/j3.png',liked: true, nameT1: 'N4', nameT2: 'Week', colorT1: AppTheme.tagN4),
-    TheCourses(courseId: '5', content: 'Learning \nJapanese N3 1', bgImg: 'assets/images/j4.png',liked: false, nameT1: 'N3', nameT2: 'Number', colorT1: AppTheme.tagN3),
-    TheCourses(courseId: '6', content: 'Learning \nJapanese N2 1', bgImg: 'assets/images/j5.png',liked: true, nameT1: 'N2', nameT2: 'Week', colorT1: AppTheme.tagN2),
-    TheCourses(courseId: '7', content: 'Learning \nJapanese N1 1', bgImg: 'assets/images/j10.png',liked: false, nameT1: 'N1', nameT2: 'Country', colorT1: AppTheme.tagN1),
-    TheCourses(courseId: '8', content: 'Learning \nJapanese N3 2', bgImg: 'assets/images/j6.png',liked: false, nameT1: 'N3', nameT2: 'People', colorT1: AppTheme.tagN3),
-    TheCourses(courseId: '9', content: 'Learning \nJapanese N2 2', bgImg: 'assets/images/j7.png',liked: false, nameT1: 'N2', nameT2: 'People', colorT1: AppTheme.tagN2),
-    TheCourses(courseId: '10', content: 'Learning \nJapanese N1 2', bgImg: 'assets/images/j2.png',liked: true, nameT1: 'N1', nameT2: 'Week', colorT1: AppTheme.tagN1),
-  ];
+
+  Widget _buildCourse( String description,String content,String tag1,String tag2,String image,Color colorT1, bool? liked, context){
+    return Padding(
+        padding:
+        const EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
+        child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => CourseDetail(
+                    description: description,
+                    content: content,
+                    tag1: tag1,
+                    tag2: tag2,
+                    imageM: image,
+                    colorT1: colorT1,
+                  liked: liked,)));
+            },
+            child: Container(
+              margin: const EdgeInsets.all(10),
+              height: 120,
+              width: 90,
+              child: Column(
+                children: [
+                  Image.asset(image,
+                    height: 90,
+                    width: 90,
+                  ),
+                  SizedBox(
+                    width: 90,
+                    child: Text(content,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 12, ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Container(
+                    padding:const EdgeInsets.only(top: 5),
+                    width: 90,
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 25,
+                          color: colorT1,
+                          child: Text(tag1, textAlign: TextAlign.center),
+                        ),
+                        Container(
+                          width: 65,
+                          color: Colors.white,
+                          child: Text(tag2, textAlign: TextAlign.center,
+                            style: const TextStyle(color: AppTheme.tagN5), ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )));
+  }
   List<TheCourses> myFCourse = [
     TheCourses(courseId: '3', content: 'Learning \nJapanese N4 1', bgImg: 'assets/images/j9.png',liked: true, nameT1: 'N4', nameT2: 'Number', colorT1: AppTheme.tagN4),
     TheCourses(courseId: '4', content: 'Learning \nJapanese N4 2', bgImg: 'assets/images/j3.png',liked: true, nameT1: 'N4', nameT2: 'Week', colorT1: AppTheme.tagN4),
