@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "536231116",
+    "firebase_url": "https://jgoapplication-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "jgoapplication",
+    "storage_bucket": "jgoapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536231116:android:263c6f38725f6ba714d669",
+        "android_client_info": {
+          "package_name": "com.example.jgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536231116-r34vahn6o45gfvrtubbro4f51m89uatb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbbvAgvc5_yiOiFz_bQZa29ElH32UW9E4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536231116-r34vahn6o45gfvrtubbro4f51m89uatb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "536231116-4r4aaf2u3guhlnu5uailjalf97igiu2c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jgoExe"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536231116:android:1ce068fad669beb614d669",
+        "android_client_info": {
+          "package_name": "com.example.jgo_exe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536231116-037phmoh364cr094gpr5gnp0s6s8bvrl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jgo_exe",
+            "certificate_hash": "47066bfe640abd18cc3e84cbb798d084b3c23652"
+          }
+        },
+        {
+          "client_id": "536231116-ng4u3c8mcna7n7l8u8sfe7n0jsf88imf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jgo_exe",
+            "certificate_hash": "02601d8362653bc073d1a08b7fc06591a0d4832e"
+          }
+        },
+        {
+          "client_id": "536231116-r34vahn6o45gfvrtubbro4f51m89uatb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbbvAgvc5_yiOiFz_bQZa29ElH32UW9E4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536231116-r34vahn6o45gfvrtubbro4f51m89uatb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "536231116-4r4aaf2u3guhlnu5uailjalf97igiu2c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jgoExe"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

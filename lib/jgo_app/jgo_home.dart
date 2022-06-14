@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jgo_exe/jgo_app/main_function/jgo_profile/profile_page_screen_unlocked.dart';
 
 import 'main_function/jgo_course/course_page_screen.dart';
 import 'main_function/jgo_home/home_page_screen.dart';
@@ -16,6 +18,9 @@ class JGoAppHomeScreen extends StatefulWidget {
 
 class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
     with TickerProviderStateMixin {
+  late User user;
+  bool isNull = true;
+
   AnimationController? animationController;
 
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
@@ -34,6 +39,15 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
     tabBody = HomePageScreen(animationController: animationController);
+
+    try {
+      user = FirebaseAuth.instance.currentUser!;
+      isNull = false;
+    } catch (e) {
+      isNull = true;
+      print(e);
+    }
+
     super.initState();
   }
 
@@ -99,8 +113,8 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
                   return;
                 }
                 setState(() {
-                  tabBody = CourseScreen(
-                      animationController: animationController);
+                  tabBody =
+                      CourseScreen(animationController: animationController);
                 });
               });
             } else if (index == 2) {
@@ -109,8 +123,8 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
                   return;
                 }
                 setState(() {
-                  tabBody = MyCourseScreen(
-                      animationController: animationController);
+                  tabBody =
+                      MyCourseScreen(animationController: animationController);
                 });
               });
             } else if (index == 3) {
@@ -119,7 +133,9 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
                   return;
                 }
                 setState(() {
-                  tabBody = const ProfileLockScreen();
+                  tabBody = isNull
+                      ? const ProfileLockScreen()
+                      : const ProfileScreen();
                 });
               });
             }
