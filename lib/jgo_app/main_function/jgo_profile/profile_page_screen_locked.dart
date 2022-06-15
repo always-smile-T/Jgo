@@ -790,7 +790,6 @@ class _ProfileLockScreenState extends State<ProfileLockScreen>
                                                       children: [
                                                         Container(
                                                           height: 50,
-                                                          width: 130,
                                                           decoration: BoxDecoration(
                                                               color: AppTheme.greyblock,
                                                               borderRadius: BorderRadius.circular(45)),
@@ -849,7 +848,6 @@ class _ProfileLockScreenState extends State<ProfileLockScreen>
                                                         ),
                                                         Container(
                                                           height: 50,
-                                                          width: 130,
                                                           decoration: BoxDecoration(
                                                               color: AppTheme.greyblock,
                                                               borderRadius: BorderRadius.circular(45)),

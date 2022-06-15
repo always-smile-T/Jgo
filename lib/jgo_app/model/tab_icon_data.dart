@@ -32,16 +32,9 @@ class TabIconData {
       animationController: null,
     ),
     TabIconData(
-      imagePath: 'assets/images/my_course.png',
-      selectedImagePath: 'assets/images/my_course1.png',
-      index: 2,
-      isSelected: false,
-      animationController: null,
-    ),
-    TabIconData(
       imagePath: 'assets/images/user.png',
       selectedImagePath: 'assets/images/user1.png',
-      index: 3,
+      index: 2,
       isSelected: false,
       animationController: null,
     ),
