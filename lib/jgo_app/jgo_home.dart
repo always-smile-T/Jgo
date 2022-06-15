@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jgo_exe/jgo_app/main_function/jgo_profile/profile_page_screen_unlocked.dart';
 import 'main_function/jgo_course/course_page_screen.dart';
 import 'main_function/jgo_home/home_page_screen.dart';
 import 'main_function/jgo_profile/profile_page_screen_locked.dart';
@@ -14,6 +16,9 @@ class JGoAppHomeScreen extends StatefulWidget {
 
 class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
     with TickerProviderStateMixin {
+  late User user;
+  bool isNull = true;
+
   AnimationController? animationController;
 
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
@@ -32,6 +37,15 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
     tabBody = const HomePageScreen();
+    tabBody = HomePageScreen();
+
+    try {
+      user = FirebaseAuth.instance.currentUser!;
+      isNull = false;
+    } catch (e) {
+      isNull = true;
+      print(e);
+    }
     super.initState();
   }
 
@@ -99,13 +113,15 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
                   tabBody = const CourseScreen();
                 });
               });
-            }else if (index == 2) {
+            }else if (index == 3) {
               animationController?.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
                 }
                 setState(() {
-                  tabBody = const ProfileLockScreen();
+                  tabBody = isNull
+                      ? const ProfileLockScreen()
+                      : const ProfileScreen();
                 });
               });
             }

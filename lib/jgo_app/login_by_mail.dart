@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jgo_exe/jgo_app/sign_up.dart';
 import 'app_theme.dart';
-
+import 'jgo_home.dart';
 
 class LoginByMailScreen extends StatefulWidget {
   const LoginByMailScreen({Key? key}) : super(key: key);
@@ -12,6 +14,7 @@ class LoginByMailScreen extends StatefulWidget {
 }
 
 class _LoginByMailScreenState extends State<LoginByMailScreen> {
+  late User user;
 
   @override
   void initState() => super.initState();
@@ -78,7 +81,11 @@ class _LoginByMailScreenState extends State<LoginByMailScreen> {
               ),
               Container(
                 padding: const EdgeInsets.all(30),
-                child: Image.asset("assets/images/logo.png", width: 165, height: 165,),
+                child: Image.asset(
+                  "assets/images/logo.png",
+                  width: 165,
+                  height: 165,
+                ),
               ),
               const SizedBox(
                 width: 50,
@@ -92,37 +99,36 @@ class _LoginByMailScreenState extends State<LoginByMailScreen> {
                         height: 30,
                         child: Image.asset("assets/images/google.png"),
                       ),
-                      const Text('Sign in by Google',style: TextStyle(
-                          color: Colors.black, fontSize: 20
-                      )
-                      ),
+                      const Text('Sign in by Google',
+                          style: TextStyle(color: Colors.black, fontSize: 20)),
                       const SizedBox(
                         width: 10,
-                      )],
+                      )
+                    ],
                   ),
-                  onPressed: (){goSignUp();},
+                  onPressed: () {
+                    _signInWithGoogle();
+                  },
                   style: ButtonStyle(
-                      shape: MaterialStateProperty.all<
-                          RoundedRectangleBorder>(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(0.0),
                               side: const BorderSide(color: Colors.black))),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Colors.white70),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white70),
                       overlayColor:
-                      MaterialStateProperty.all<Color>(Colors.white70),
+                          MaterialStateProperty.all<Color>(Colors.white70),
                       foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white70),
+                          MaterialStateProperty.all<Color>(Colors.white70),
                       elevation: MaterialStateProperty.resolveWith<double>(
-                            (Set<MaterialState> states) {
+                        (Set<MaterialState> states) {
                           if (states.contains(MaterialState.pressed) ||
                               states.contains(MaterialState.disabled)) {
                             return 0;
                           }
                           return 10;
                         },
-                      ))
-              ),
+                      ))),
             ],
           ),
         ),
@@ -137,5 +143,42 @@ class _LoginByMailScreenState extends State<LoginByMailScreen> {
   goSignUp() {
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: gotoSignUp), (route) => false);
+  }
+
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
+  }
+
+  Future<void> _signInWithGoogle() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    try {
+      // Trigger the authentication flow
+      final googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final googleAuth = await googleUser.authentication;
+
+      if (googleAuth != null) {
+        // Create a new credential
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        // Once signed in, return the UserCredential
+        await _auth.signInWithCredential(credential);
+        user = FirebaseAuth.instance.currentUser!;
+        print(await user.getIdToken());
+
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const JGoAppHomeScreen()),
+            ((route) => false));
+      }
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        print('${e.message}');
+      });
+    }
   }
 }
