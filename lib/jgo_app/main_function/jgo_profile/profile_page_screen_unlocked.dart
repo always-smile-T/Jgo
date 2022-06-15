@@ -100,6 +100,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   ),
                                 ),
                               ),
+
+                              //TO-DO: Align the full name of user in profile screen
+                              Positioned(
+                                  bottom: 185,
+                                  left: 120,
+                                  child: Text(userProfile.fullName,
+                                      style: const TextStyle(
+                                          color: Colors.black, fontSize: 20))),
                               Positioned(
                                 top: 90,
                                 left: 80,
@@ -163,18 +171,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                           flex: 2,
                           child: Stack(
                             children: [
-                              //TO-DO: Align the full name of user in profile screen
-                              Positioned(
-                                  top: 30,
-                                  left: 0,
-                                  child: Stack(
-                                    children: [
-                                      Text(userProfile.fullName,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                              color: Colors.black, fontSize: 20))
-                                    ],
-                                  )),
                               Positioned(
                                 bottom: 110,
                                 right: 20,

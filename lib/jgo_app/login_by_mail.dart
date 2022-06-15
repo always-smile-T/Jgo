@@ -156,7 +156,7 @@ class _LoginByMailScreenState extends State<LoginByMailScreen> {
       final googleUser = await GoogleSignIn().signIn();
 
       // Obtain the auth details from the request
-      final googleAuth = await googleUser.authentication;
+      final googleAuth = await googleUser?.authentication;
 
       if (googleAuth != null) {
         // Create a new credential

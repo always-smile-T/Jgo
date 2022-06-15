@@ -20,7 +20,7 @@ class _BuyCoinPageScreenState extends State<BuyCoinPageScreen> {
         body: Column(
           children: [
             Container(
-              margin: const EdgeInsets.fromLTRB(10, 30, 10, 10),
+              margin: const EdgeInsets.fromLTRB(30, 30, 10, 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

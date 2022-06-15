@@ -257,28 +257,14 @@ class _SubcriptionFeeState extends State<SubcriptionFee>
                               if(_setState=='2'){
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(content: Text("You Have 1 year to enjoy this moment.")));
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                        const JGoAppHomeScreen()),
-                                        (route) => false);
                               }else if(_setState=='1'){
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(content: Text("You Have 3 months to enjoy this moment.")));
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                        const JGoAppHomeScreen()),
-                                        (route) => false);
                               }
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(content: Text("You Have 14 days to enjoy this moment.")));
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                      const JGoAppHomeScreen()),
-                                      (route) => false);
                             });
+                            Navigator.of(context).pop();
                           },
                           style: ButtonStyle(
                               minimumSize: MaterialStateProperty.all<Size>(Size.infinite),
