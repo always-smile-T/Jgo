@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'main_function/jgo_course/course_page_screen.dart';
 import 'main_function/jgo_home/home_page_screen.dart';
-import 'main_function/jgo_my_course/my_course_page_screen.dart';
 import 'main_function/jgo_profile/profile_page_screen_locked.dart';
 import 'model/bottom_bar_view.dart';
 import 'model/tab_icon_data.dart';
@@ -33,7 +31,7 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
 
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
-    tabBody = HomePageScreen(animationController: animationController);
+    tabBody = const HomePageScreen();
     super.initState();
   }
 
@@ -89,8 +87,7 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
                   return;
                 }
                 setState(() {
-                  tabBody =
-                      HomePageScreen(animationController: animationController);
+                  tabBody =const HomePageScreen();
                 });
               });
             } else if (index == 1) {
@@ -99,21 +96,10 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
                   return;
                 }
                 setState(() {
-                  tabBody = CourseScreen(
-                      animationController: animationController);
+                  tabBody = const CourseScreen();
                 });
               });
-            } else if (index == 2) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody = MyCourseScreen(
-                      animationController: animationController);
-                });
-              });
-            } else if (index == 3) {
+            }else if (index == 2) {
               animationController?.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;

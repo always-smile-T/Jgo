@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:jgo_exe/jgo_app/main_function/jgo_course/lesson/grammar.dart';
+import 'package:jgo_exe/jgo_app/main_function/jgo_course/lesson/quiz.dart';
+import 'package:jgo_exe/jgo_app/main_function/jgo_course/lesson/vocabulary.dart';
 import '../../app_theme.dart';
 
-class CourseDetail extends StatelessWidget {
-  const CourseDetail({Key? key, this.description, this.content, this.tag1, this.tag2, this.imageM, this.colorT1, this.liked}) : super(key: key);
+class CourseDetail extends StatefulWidget {
+  const CourseDetail({Key? key,this.id, this.description, this.content, this.tag1, this.tag2, this.imageM, this.colorT1, this.liked}) : super(key: key);
+  final id, description, content, tag1, tag2, imageM, colorT1, liked;
+  @override
+  _CourseDetailState createState() => _CourseDetailState(id, description, content, tag1, tag2, imageM, colorT1, liked);
+}
 
+class  _CourseDetailState extends State<CourseDetail> with TickerProviderStateMixin{
+  final id, description, content, tag1, tag2, imageM, colorT1;
+  late bool liked;
+  _CourseDetailState(this.id, this.description, this.content, this.tag1, this.tag2, this.imageM, this.colorT1, this.liked);
 
-  final description, content, tag1, tag2, imageM, colorT1, liked;
+  @override
+  void initState() {
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +46,7 @@ class CourseDetail extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 30.0),
-          Container(
+          SizedBox(
             height: 220,
             child: Stack(
               clipBehavior: Clip.none,
@@ -50,7 +65,11 @@ class CourseDetail extends StatelessWidget {
                   right: 30,
                   child: IconButton(
                   icon: Image.asset( (liked == true) ? 'assets/images/ticked.png' : 'assets/images/untick.png' , height: 50, width: 50, fit: BoxFit.fill,),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      liked = !liked;
+                    });
+                  },
                 ),)
               ],
             ),
@@ -88,39 +107,89 @@ class CourseDetail extends StatelessWidget {
           const SizedBox(height: 20.0),
           Container(
             margin: const EdgeInsets.only(top: 20, bottom: 70),
-            alignment: Alignment.center,
-            width: 100,
-            height: 50,
-            child: ElevatedButton(
-                child: const Text(
-                      'Start',
-                      style: TextStyle(
-                          fontSize: 24,
-                        color: Colors.black
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                    child: const SizedBox(
+                      width: 70,
+                      child: Text(
+                        'Vocabulary',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black
+                        ),
                       ),
                     ),
-                onPressed: (){},
-                style: ButtonStyle(
-                    minimumSize: MaterialStateProperty.all<Size>(Size.infinite),
-                    shape: MaterialStateProperty.all<
-                        RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => VocabularyPage(
+                            id: id,)));
+                    },
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<
+                          RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0),)),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        AppTheme.greenPrimary),
-                    overlayColor:
-                    MaterialStateProperty.all<Color>(Colors.white70),
-                    foregroundColor:
-                    MaterialStateProperty.all<Color>(Colors.white70),
-                    elevation: MaterialStateProperty.resolveWith<double>(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.pressed) ||
-                            states.contains(MaterialState.disabled)) {
-                          return 0;
-                        }
-                        return 10;
-                      },
-                    ))),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          AppTheme.green1),
+                      overlayColor:
+                      MaterialStateProperty.all<Color>(Colors.white70),)),
+                ElevatedButton(
+                    child: const SizedBox(
+                      width: 70,
+                      child: Text(
+                        'Grammar',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black
+                        ),
+                      ),
+                    ),
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => GrammarPage(
+                            id: id,)));
+                    },
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<
+                          RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          AppTheme.green2),
+                      overlayColor:
+                      MaterialStateProperty.all<Color>(Colors.white70),)),
+                ElevatedButton(
+                    child: const SizedBox(
+                      width: 70,
+                      child: Text(
+                        'Quiz',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black
+                        ),
+                      ),
+                    ),
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => QuizPage(
+                            id: id,)));
+                    },
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<
+                          RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          AppTheme.green3),
+                      overlayColor:
+                      MaterialStateProperty.all<Color>(Colors.white70),)),
+              ],
+            ),
           )
         ]),
       ),
