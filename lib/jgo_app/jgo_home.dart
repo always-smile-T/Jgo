@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jgo_exe/jgo_app/main_function/jgo_profile/profile_page_screen_locked.dart';
 import 'package:jgo_exe/jgo_app/main_function/jgo_profile/profile_page_screen_unlocked.dart';
+import 'jgo_home_profile.dart';
 import 'main_function/jgo_course/course_page_screen.dart';
 import 'main_function/jgo_home/home_page_screen.dart';
-import 'main_function/jgo_profile/profile_page_screen_locked.dart';
 import 'model/bottom_bar_view.dart';
 import 'model/tab_icon_data.dart';
 
@@ -16,10 +17,10 @@ class JGoAppHomeScreen extends StatefulWidget {
 
 class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
     with TickerProviderStateMixin {
+  AnimationController? animationController;
+
   late User user;
   bool isNull = true;
-
-  AnimationController? animationController;
 
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
@@ -46,6 +47,7 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
       isNull = true;
       print(e);
     }
+
     super.initState();
   }
 
@@ -101,7 +103,7 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
                   return;
                 }
                 setState(() {
-                  tabBody =const HomePageScreen();
+                  tabBody = const HomePageScreen();
                 });
               });
             } else if (index == 1) {
@@ -113,15 +115,13 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
                   tabBody = const CourseScreen();
                 });
               });
-            }else if (index == 3) {
+            } else if (index == 2) {
               animationController?.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
                 }
                 setState(() {
-                  tabBody = isNull
-                      ? const ProfileLockScreen()
-                      : const ProfileScreen();
+                  tabBody = isNull ? ProfileLockScreen() : ProfileScreen();
                 });
               });
             }

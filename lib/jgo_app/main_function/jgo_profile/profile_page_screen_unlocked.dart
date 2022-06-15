@@ -103,11 +103,11 @@ class _ProfileScreenState extends State<ProfileScreen>
 
                               //TO-DO: Align the full name of user in profile screen
                               Positioned(
-                                  bottom: 72,
-                                  left: 50,
+                                  bottom: 185,
+                                  left: 120,
                                   child: Text(userProfile.fullName,
                                       style: const TextStyle(
-                                          color: Colors.black, fontSize: 24))),
+                                          color: Colors.black, fontSize: 20))),
                               Positioned(
                                 top: 90,
                                 left: 80,
