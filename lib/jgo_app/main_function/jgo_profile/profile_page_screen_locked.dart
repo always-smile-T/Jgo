@@ -164,11 +164,8 @@ class _ProfileLockScreenState extends State<ProfileLockScreen>
                                       child: ElevatedButton(
                                           child: Image.asset("assets/images/month_button.png"),
                                           onPressed: (){
-                                            Navigator.of(context).pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                    builder: (BuildContext context) =>
-                                                    const SubcriptionFee()),
-                                                    (route) => false);
+                                            Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (context) =>const SubcriptionFee()));
                                           },
                                           style: ButtonStyle(
                                               shape: MaterialStateProperty.all<
@@ -888,8 +885,8 @@ class _ProfileLockScreenState extends State<ProfileLockScreen>
                                                                 ],
                                                               ),
                                                               onPressed: (){
-                                                                Navigator.of(context).pushAndRemoveUntil(
-                                                                    MaterialPageRoute(builder: gotoHelpCenter), (route) => false);},
+                                                                Navigator.of(context).push(MaterialPageRoute(
+                                                                    builder: (context) =>const HelpCenterPageScreen()));},
                                                               style: ButtonStyle(
                                                                   backgroundColor: MaterialStateProperty.all<Color>(
                                                                       AppTheme.greenPrimary),
@@ -1037,8 +1034,8 @@ class _ProfileLockScreenState extends State<ProfileLockScreen>
                                           ),
                                         ),
                                         onPressed: (){
-                                          Navigator.of(context).pushAndRemoveUntil(
-                                              MaterialPageRoute(builder: gotoRegister), (route) => false);},
+                                          Navigator.of(context).push(MaterialPageRoute(
+                                              builder: (context) =>const SignUpScreen()));},
                                         style: ButtonStyle(
                                             shape: MaterialStateProperty.all<
                                                 RoundedRectangleBorder>(

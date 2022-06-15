@@ -100,14 +100,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   ),
                                 ),
                               ),
-
-                              //TO-DO: Align the full name of user in profile screen
-                              Positioned(
-                                  bottom: 72,
-                                  left: 50,
-                                  child: Text(userProfile.fullName,
-                                      style: const TextStyle(
-                                          color: Colors.black, fontSize: 24))),
                               Positioned(
                                 top: 90,
                                 left: 80,
@@ -156,14 +148,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   height: 25,
                                   child: IconButton(
                                     onPressed: () {
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                              builder: (BuildContext context) =>
-                                                  const BuyCoinPageScreen()),
-                                          (route) => false);
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (context) =>const BuyCoinPageScreen()));
                                     },
                                     icon: Image.asset(
-                                        'assets/images/wallet_icon1.png'),
+                                        'assets/images/wallet_icon1.png', fit: BoxFit.fill,),
                                     ///// ++++++++ loi
                                   ),
                                 ),
@@ -174,6 +163,18 @@ class _ProfileScreenState extends State<ProfileScreen>
                           flex: 2,
                           child: Stack(
                             children: [
+                              //TO-DO: Align the full name of user in profile screen
+                              Positioned(
+                                  top: 30,
+                                  left: 0,
+                                  child: Stack(
+                                    children: [
+                                      Text(userProfile.fullName,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                              color: Colors.black, fontSize: 20))
+                                    ],
+                                  )),
                               Positioned(
                                 bottom: 110,
                                 right: 20,
@@ -182,8 +183,15 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   width: 200,
                                   height: 30,
                                   child: ElevatedButton(
-                                      child: Image.asset(
-                                          "assets/images/friends_button1.png"),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Image.asset(
+                                              "assets/images/friendship.png"),
+                                          const Text('0 friends', style: TextStyle(color: AppTheme.greenPrimary),),
+                                          const SizedBox(width: 10,)
+                                        ],
+                                      ),
                                       onPressed: () {},
                                       style: ButtonStyle(
                                           shape:
@@ -267,15 +275,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   height: 30,
                                   child: ElevatedButton(
                                       child: Image.asset(
-                                          "assets/images/month_button1.png"),
+                                          "assets/images/month_button.png"),
                                       onPressed: () {
-                                        Navigator.of(context)
-                                            .pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                    builder: (BuildContext
-                                                            context) =>
-                                                        const SubcriptionFee()),
-                                                (route) => false);
+                                        Navigator.of(context).push(MaterialPageRoute(
+                                            builder: (context) =>const SubcriptionFee()));
                                       },
                                       style: ButtonStyle(
                                           shape:
@@ -370,74 +373,22 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
                                                           .spaceEvenly,
-                                                  children: [
-                                                    Container(
-                                                      height: 15,
-                                                      width: 50,
-                                                      decoration: BoxDecoration(
-                                                          color: AppTheme
-                                                              .greyblock,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                    ),
-                                                    Container(
-                                                      height: 15,
-                                                      width: 50,
-                                                      decoration: BoxDecoration(
-                                                          color: AppTheme
-                                                              .greyblock,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                    ),
-                                                    Container(
-                                                      height: 15,
-                                                      width: 50,
-                                                      decoration: BoxDecoration(
-                                                          color: AppTheme
-                                                              .greyblock,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                    ),
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: const [
+                                                      Text('スター'),
+                                                    Text('望む'),
+                                                    Text('永遠に'),
                                                   ],
                                                 ),
                                                 Column(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    Container(
-                                                      height: 15,
-                                                      width: 50,
-                                                      decoration: BoxDecoration(
-                                                          color: AppTheme
-                                                              .greyblock,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                    ),
-                                                    Container(
-                                                      height: 15,
-                                                      width: 50,
-                                                      decoration: BoxDecoration(
-                                                          color: AppTheme
-                                                              .greyblock,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                    ),
-                                                    Container(
-                                                      height: 15,
-                                                      width: 50,
-                                                      decoration: BoxDecoration(
-                                                          color: AppTheme
-                                                              .greyblock,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5)),
-                                                    ),
+                                                  MainAxisAlignment
+                                                      .spaceEvenly,
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                  children: const [
+                                                    Text('star'),
+                                                    Text('hope'),
+                                                    Text('forever'),
                                                   ],
                                                 ),
                                               ],
@@ -451,11 +402,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
-                                                      .spaceBetween,
+                                                      .center,
                                               children: [
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
                                                 ElevatedButton(
                                                     child: const Text('View all',
                                                         style: TextStyle(
@@ -490,8 +438,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                             return 10;
                                                           },
                                                         ))),
-                                                Image.asset(
-                                                    'assets/images/lock.png')
                                               ],
                                             ),
                                           ))
@@ -616,11 +562,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
-                                                      .spaceBetween,
+                                                      .center,
                                               children: [
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
                                                 ElevatedButton(
                                                     child: const Text('0',
                                                         style: TextStyle(
@@ -655,6 +598,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                             return 10;
                                                           },
                                                         ))),
+                                                const SizedBox(width: 10,),
                                                 Stack(
                                                   children: <Widget>[
                                                     // Stroked text as border.
@@ -690,8 +634,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                     ),
                                                   ],
                                                 ),
-                                                Image.asset(
-                                                    'assets/images/lock.png')
                                               ],
                                             ),
                                           )),
@@ -752,32 +694,20 @@ class _ProfileScreenState extends State<ProfileScreen>
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                Container(
+                                                SizedBox(
                                                   height: 60,
                                                   width: 60,
-                                                  decoration: BoxDecoration(
-                                                      color: AppTheme.greyblock,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5)),
+                                                  child: Image.asset('assets/images/my_course2.png'),
                                                 ),
-                                                Container(
+                                                SizedBox(
                                                   height: 60,
                                                   width: 60,
-                                                  decoration: BoxDecoration(
-                                                      color: AppTheme.greyblock,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5)),
+                                                  child: Image.asset('assets/images/my_course3.png'),
                                                 ),
-                                                Container(
+                                                SizedBox(
                                                   height: 60,
                                                   width: 60,
-                                                  decoration: BoxDecoration(
-                                                      color: AppTheme.greyblock,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5)),
+                                                  child: Image.asset('assets/images/my_course4.png'),
                                                 ),
                                               ],
                                             )),
@@ -790,11 +720,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
-                                                      .spaceBetween,
+                                                      .center,
                                               children: [
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
                                                 ElevatedButton(
                                                     child: const Text('View all',
                                                         style: TextStyle(
@@ -829,8 +756,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                             return 10;
                                                           },
                                                         ))),
-                                                Image.asset(
-                                                    'assets/images/lock.png')
                                               ],
                                             ),
                                           ))
@@ -1201,14 +1126,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                             ],
                                                           ),
                                                           onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pushAndRemoveUntil(
-                                                                    MaterialPageRoute(
-                                                                        builder:
-                                                                            gotoHelpCenter),
-                                                                    (route) =>
-                                                                        false);
+                                                            Navigator.of(context).push(MaterialPageRoute(
+                                                                builder: (context) =>const HelpCenterPageScreen()));
                                                           },
                                                           style: ButtonStyle(
                                                               backgroundColor:
@@ -1423,10 +1342,6 @@ class _ProfileScreenState extends State<ProfileScreen>
             ],
           )),
     ));
-  }
-
-  Widget gotoHelpCenter(BuildContext context) {
-    return const HelpCenterPageScreen();
   }
 
   Widget gotoHomeScreen(BuildContext context) {

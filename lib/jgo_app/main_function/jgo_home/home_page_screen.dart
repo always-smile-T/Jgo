@@ -131,11 +131,8 @@ class _HomePageScreenState extends State<HomePageScreen>
                                  TextButton(
                                      onPressed: (){
                                        if(post[index].postId == '9'){
-                                         Navigator.of(context).pushAndRemoveUntil(
-                                             MaterialPageRoute(
-                                                 builder: (BuildContext context) =>
-                                                 const PostDetailScreen()),
-                                                 (route) => false);
+                                         Navigator.of(context).push(MaterialPageRoute(
+                                             builder: (context) =>const PostDetailScreen()));
                                        }
                                      },
                                      child: const Text('View more',
@@ -218,7 +215,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                             Text(story[index].name, style: const TextStyle(
                                 fontSize: 12
                             ),),
-                            const SizedBox(width: 10,),
+                            const SizedBox(width: 20,),
                             SizedBox(
                               width: 25,
                               height: 25,
@@ -406,11 +403,8 @@ class _HomePageScreenState extends State<HomePageScreen>
                             ),
                             onPressed: (){
                               if(_setState == true) {
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                        const CreatePostScreen()),
-                                        (route) => false);
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>const CreatePostScreen()));
                               }
                             },
                             style: ButtonStyle(

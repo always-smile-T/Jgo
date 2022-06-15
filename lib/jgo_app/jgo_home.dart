@@ -113,7 +113,7 @@ class _DoMaAppHomeScreenState extends State<JGoAppHomeScreen>
                   tabBody = const CourseScreen();
                 });
               });
-            }else if (index == 3) {
+            }else if (index == 2) {
               animationController?.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;

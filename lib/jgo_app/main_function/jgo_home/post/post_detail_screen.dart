@@ -37,11 +37,7 @@ class _PostDetailScreenState extends State<PostDetailScreen> {
                             height: 40,
                             child: IconButton(
                                 onPressed: () {
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                          const JGoAppHomeScreen()),
-                                          (route) => false);
+                                  Navigator.of(context).pop();
                                 },
                                 icon: Image.asset("assets/images/back.png")),
                           ),

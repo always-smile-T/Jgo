@@ -65,14 +65,17 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
                   //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Text('Question $numQ', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
                     Hero(
-                        tag: quiz[n].image[index],
-                        child: Image.asset(quiz[n].image[index],
+                        tag: quiz[n].image[numOrder],
+                        child: Image.asset(quiz[n].image[numOrder],
                             height: 200.0, fit: BoxFit.fill)),
-                    Text(quiz[n].question[numOrder],),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(quiz[n].question[numOrder],style: const TextStyle(fontSize: 20),),
                         ListView(
                            scrollDirection: Axis.vertical,
                            controller: _scrollController,
@@ -88,7 +91,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
                                   setState(() {
                                     numA = 0;
                                     check = quiz[n].answer[numOrder].q1.toString();
-                                    print(check);
+                                    isCorrect = 0;
                                   });
                                 },
                               ),
@@ -102,6 +105,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
                                   setState(() {
                                     numA = 1;
                                     check = quiz[n].answer[numOrder].q2.toString();
+                                    isCorrect = 0;
                                   });
                                 },
                               ),
@@ -115,6 +119,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
                                   setState(() {
                                     numA = 2;
                                     check = quiz[n].answer[numOrder].q3.toString();
+                                    isCorrect = 0;
                                   });
                                 },
                               ),
@@ -128,6 +133,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
                                   setState(() {
                                     numA = 3;
                                     check = quiz[n].answer[numOrder].q4.toString();
+                                    isCorrect = 0;
                                   });
                                 },
                               ),
@@ -270,7 +276,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
   TheAnswer(q1: '中国人（ちゅうごくじん）',q2: '日本人（にほんじん）',q3: 'アメリカ人（あめりかじん）',q4: 'イギリス人（いぎりすじん）'),
   TheAnswer(q1: 'Mai is American',q2: 'Mai is French',q3: 'Mai is Korean',q4: 'Mai is Japanese'),
   TheAnswer(q1: 'イギリスじん',q2: 'にほんじん',q3: 'アメリカじん',q4: 'ベトナムじん'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['日本人（にほんじん）','I am Chinese','中国人（ちゅうごくじん）','Mai is Korean','ベトナムじん']),
     TheQuiz(
         question: ['私は。。。ではありません。\nI am not Korean','私はベトナム人ではありません。','マイさんは姉ではありません。',
@@ -280,7 +286,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           TheAnswer(q1: '中国人（ちゅうごくじん）',q2: '日本人（にほんじん）',q3: 'アメリカ人（あめりかじん）',q4: 'イギリス人（いぎりすじん）'),
           TheAnswer(q1: 'Mai is American',q2: 'Mai is French',q3: 'Mai is Korean',q4: 'Mai is Japanese'),
           TheAnswer(q1: 'イギリスじん',q2: 'にほんじん',q3: 'アメリカじん',q4: 'ベトナムじん'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['韓国人（かんこくじん）','I am Vietnamese','日本人（にほんじん）','Mai is American','イギリスじん']),
     TheQuiz(
         question: ['One','Twenty two', 'Nine',
@@ -290,7 +296,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           TheAnswer(q1: 'ひゃく',q2: 'きゅう',q3: 'きゅ',q4: 'なな'),
           TheAnswer(q1: 'I can eat Sushi',q2: 'I can swim',q3: 'I can speak English',q4: 'I can cook'),
           TheAnswer(q1: '食べることができる。',q2: '作ることができる。',q3: '買うことができる。',q4: '飲むことができる。'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['一','にじゅうに','きゅう','I can speak English','食べることができる。']),
     TheQuiz(
         question: ['Today is Tuesday','Today is not Friday','Which word is Kanji of "どようび"?',
@@ -302,7 +308,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           TheAnswer(q1: 'I can learn English', q2: 'I can cook',q3: 'I cannot go to school',q4: 'I cannot learn English'),
           TheAnswer(q1:'漢字（かんじ)を書く (かく)ことができません。',q2: '英語 (えいご) を話す (はなす) ことができません。',
             q3: '漢字（かんじ)を書く (かく)ことができます。',q4: 'すしを食べることができる'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['今日は火曜日（きょうはかようび）。','今日は金曜日ではありません。（きょうはきんようびではありません）。',
           '土曜日','I cannot learn English','漢字（かんじ)を書く (かく)ことができません。']),
     TheQuiz(
@@ -313,7 +319,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           TheAnswer(q1: '中国人（ちゅうごくじん）',q2: '日本人（にほんじん）',q3: 'アメリカ人（あめりかじん）',q4: 'イギリス人（いぎりすじん）'),
           TheAnswer(q1: 'Mai is American',q2: 'Mai is French',q3: 'Mai is Korean',q4: 'Mai is Japanese'),
           TheAnswer(q1: 'イギリスじん',q2: 'にほんじん',q3: 'アメリカじん',q4: 'ベトナムじん'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['日本人（にほんじん）','I am Chinese','中国人（ちゅうごくじん）','Mai is Korean','ベトナムじん']),
     TheQuiz(
         question: ['私は。。。ではありません。\nI am not Korean','私はベトナム人ではありません。','マイさんは姉ではありません。',
@@ -323,7 +329,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           TheAnswer(q1: '中国人（ちゅうごくじん）',q2: '日本人（にほんじん）',q3: 'アメリカ人（あめりかじん）',q4: 'イギリス人（いぎりすじん）'),
           TheAnswer(q1: 'Mai is American',q2: 'Mai is French',q3: 'Mai is Korean',q4: 'Mai is Japanese'),
           TheAnswer(q1: 'イギリスじん',q2: 'にほんじん',q3: 'アメリカじん',q4: 'ベトナムじん'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['韓国人（かんこくじん）','I am Vietnamese','日本人（にほんじん）','Mai is American','イギリスじん']),
     TheQuiz(
         question: ['One','Twenty two', 'Nine',
@@ -333,7 +339,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           TheAnswer(q1: 'ひゃく',q2: 'きゅう',q3: 'きゅ',q4: 'なな'),
           TheAnswer(q1: 'I can eat Sushi',q2: 'I can swim',q3: 'I can speak English',q4: 'I can cook'),
           TheAnswer(q1: '食べることができる。',q2: '作ることができる。',q3: '買うことができる。',q4: '飲むことができる。'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['一','にじゅうに','きゅう','I can speak English','食べることができる。']),
     TheQuiz(
         question: ['Today is Tuesday','Today is not Friday','Which word is Kanji of "どようび"?',
@@ -345,7 +351,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           TheAnswer(q1: 'I can learn English', q2: 'I can cook',q3: 'I cannot go to school',q4: 'I cannot learn English'),
           TheAnswer(q1:'漢字（かんじ)を書く (かく)ことができません。',q2: '英語 (えいご) を話す (はなす) ことができません。',
               q3: '漢字（かんじ)を書く (かく)ことができます。',q4: 'すしを食べることができる'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['今日は火曜日（きょうはかようび）。','今日は金曜日ではありません。（きょうはきんようびではありません）。',
           '土曜日','I cannot learn English','漢字（かんじ)を書く (かく)ことができません。']),TheQuiz(
         question: ['私は。。。です。\nI am Japanese',' 私は中国人です。', 'たなかさんは　。。。です。',
@@ -355,7 +361,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           TheAnswer(q1: '中国人（ちゅうごくじん）',q2: '日本人（にほんじん）',q3: 'アメリカ人（あめりかじん）',q4: 'イギリス人（いぎりすじん）'),
           TheAnswer(q1: 'Mai is American',q2: 'Mai is French',q3: 'Mai is Korean',q4: 'Mai is Japanese'),
           TheAnswer(q1: 'イギリスじん',q2: 'にほんじん',q3: 'アメリカじん',q4: 'ベトナムじん'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['日本人（にほんじん）','I am Chinese','中国人（ちゅうごくじん）','Mai is Korean','ベトナムじん']),
     TheQuiz(
         question: ['私は。。。ではありません。\nI am not Korean','私はベトナム人ではありません。','マイさんは姉ではありません。',
@@ -365,7 +371,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           TheAnswer(q1: '中国人（ちゅうごくじん）',q2: '日本人（にほんじん）',q3: 'アメリカ人（あめりかじん）',q4: 'イギリス人（いぎりすじん）'),
           TheAnswer(q1: 'Mai is American',q2: 'Mai is French',q3: 'Mai is Korean',q4: 'Mai is Japanese'),
           TheAnswer(q1: 'イギリスじん',q2: 'にほんじん',q3: 'アメリカじん',q4: 'ベトナムじん'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['韓国人（かんこくじん）','I am Vietnamese','日本人（にほんじん）','Mai is American','イギリスじん']),
     TheQuiz(
         question: ['One’','Twenty two’', 'Nine',
@@ -375,7 +381,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           TheAnswer(q1: 'ひゃく',q2: 'きゅう',q3: 'きゅ',q4: 'なな'),
           TheAnswer(q1: 'I can eat Sushi',q2: 'I can swim',q3: 'I can speak English',q4: 'I can cook'),
           TheAnswer(q1: '食べることができる。',q2: '作ることができる。',q3: '買うことができる。',q4: '飲むことができる。'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['一','にじゅうに','きゅう','I can speak English','食べることができる。']),
     TheQuiz(
         question: ['Today is Tuesday','Today is not Friday','Which word is Kanji of "どようび"?',
@@ -387,7 +393,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
           TheAnswer(q1: 'I can learn English', q2: 'I can cook',q3: 'I cannot go to school',q4: 'I cannot learn English'),
           TheAnswer(q1:'漢字（かんじ)を書く (かく)ことができません。',q2: '英語 (えいご) を話す (はなす) ことができません。',
               q3: '漢字（かんじ)を書く (かく)ことができます。',q4: 'すしを食べることができる'),],
-        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png','assets/images/j6.png'],
+        image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['今日は火曜日（きょうはかようび）。','今日は金曜日ではありません。（きょうはきんようびではありません）。',
           '土曜日','I cannot learn English','漢字（かんじ)を書く (かく)ことができません。']),
   ];

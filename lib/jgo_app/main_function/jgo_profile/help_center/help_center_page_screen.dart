@@ -30,11 +30,7 @@ class _HelpCenterPageScreenState extends State<HelpCenterPageScreen> {
                       children: [
                         IconButton(
                             onPressed: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                      const JGoAppProfileScreen()),
-                                      (route) => false);
+                              Navigator.of(context).pop();
                             },
                             icon: Image.asset("assets/images/back.png")),
                         Stack(

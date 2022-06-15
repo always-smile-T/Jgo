@@ -38,11 +38,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   children: [
                     IconButton(
                         onPressed: () {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                  const JGoAppHomeScreen()),
-                                  (route) => false);
+                          Navigator.of(context).pop();
                         },
                         icon: Image.asset("assets/images/back.png")),
                     Center(

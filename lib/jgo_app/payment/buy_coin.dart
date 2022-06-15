@@ -5,14 +5,6 @@ import 'package:jgo_exe/jgo_app/jgo_home_profile.dart';
 import '../app_theme.dart';
 
 
-//dong 221 them icon bestseller
-//
-//
-//
-//
-//
-//
-
 class BuyCoinPageScreen extends StatefulWidget {
   const BuyCoinPageScreen({Key? key}) : super(key: key);
 
@@ -36,12 +28,7 @@ class _BuyCoinPageScreenState extends State<BuyCoinPageScreen> {
                     children: [
                       IconButton(
                           onPressed: () {
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                    const JGoAppProfileScreen()),
-                                    (route) => false);
-                          },
+                            Navigator.of(context).pop();},
                           icon: Image.asset("assets/images/back.png")),
                       SizedBox(
                         width: 50,
@@ -372,11 +359,7 @@ class _BuyCoinPageScreenState extends State<BuyCoinPageScreen> {
                                 "Well, you receive 9000 cents!.")));
                       }
                     });
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                            const JGoAppProfileScreen()),
-                            (route) => false);
+                    Navigator.of(context).pop();
                   },
                   style: ButtonStyle(
                       minimumSize: MaterialStateProperty.all<Size>(Size.infinite),

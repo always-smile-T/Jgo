@@ -40,11 +40,7 @@ class _LiveChatScreenState extends State<LiveChatScreen> {
                     ),
                     IconButton(
                       onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                const HelpCenterPageScreen()),
-                                (route) => false);
+                        Navigator.of(context).pop();
                       },
                       icon: Image.asset('assets/images/back.png'),
                     ),
