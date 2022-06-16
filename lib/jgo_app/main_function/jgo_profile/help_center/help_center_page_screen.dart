@@ -65,11 +65,8 @@ class _HelpCenterPageScreenState extends State<HelpCenterPageScreen> {
                         ),
                         IconButton(
                             onPressed: () {
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                      const LiveChatScreen()),
-                                      (route) => false); }, 
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>LiveChatScreen())); },
                             icon: Image.asset("assets/images/more_options.png")),
                       ],
                     ),

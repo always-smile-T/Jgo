@@ -236,6 +236,7 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
                   setState(() {
                     numOrder = 0;
                     isCorrect = 0;
+                    numQ = 1;
                   });
                   Navigator.pop(context);
                 },
@@ -353,7 +354,8 @@ class  _QuizPageState extends State<QuizPage> with TickerProviderStateMixin{
               q3: '漢字（かんじ)を書く (かく)ことができます。',q4: 'すしを食べることができる'),],
         image: ['assets/images/j1.png','assets/images/j2.png','assets/images/j3.png','assets/images/j4.png','assets/images/j5.png'],
         correctAnswer: ['今日は火曜日（きょうはかようび）。','今日は金曜日ではありません。（きょうはきんようびではありません）。',
-          '土曜日','I cannot learn English','漢字（かんじ)を書く (かく)ことができません。']),TheQuiz(
+          '土曜日','I cannot learn English','漢字（かんじ)を書く (かく)ことができません。']),
+    TheQuiz(
         question: ['私は。。。です。\nI am Japanese',' 私は中国人です。', 'たなかさんは　。。。です。',
           'まいさんは韓国人です。', 'Which word is same meaning with "アメリカ人"？'],
         answer: [ TheAnswer(q1: '日本人（にほんじん）', q2: 'アメリカ人（ アメリカじん）',q3: '中国人（ちゅうごくじん）',q4: '韓国人（かんこくじん）'),
