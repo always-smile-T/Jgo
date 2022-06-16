@@ -52,7 +52,7 @@ class _HomePageScreenState extends State<HomePageScreen>
             itemCount: post.length,
             controller: _scrollController,
             padding: const EdgeInsets.fromLTRB(10, 150, 10, 70),
-            reverse: true,
+            //reverse: true,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index){
@@ -128,15 +128,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                              Row(
                                mainAxisAlignment: MainAxisAlignment.start,
                                children: [
-                                 TextButton(
-                                     onPressed: (){
-                                       if(post[index].postId == '9'){
-                                         Navigator.of(context).push(MaterialPageRoute(
-                                             builder: (context) =>const PostDetailScreen()));
-                                       }
-                                     },
-                                     child: const Text('View more',
-                                       style: TextStyle(color: AppTheme.greenPrimary, fontSize: 14),)),
+                                 _buildPost(post[index].postId, post[index].postTitle, post[index].avatar, post[index].name, post[index].star, post[index].cmt, post[index].liked, context),
                                ],
                              ),
                             const Divider(
@@ -171,7 +163,7 @@ class _HomePageScreenState extends State<HomePageScreen>
                                          const SizedBox(
                                            width: 5,
                                          ),
-                                         Text(post[index].cmt, style: const TextStyle(color: AppTheme.greenPrimary),)
+                                         Text(post[index].cmt.toString(), style: const TextStyle(color: AppTheme.greenPrimary),)
                                        ],
                                      )
                                    ],
@@ -421,16 +413,36 @@ class _HomePageScreenState extends State<HomePageScreen>
                     )
                   );
   }
+  Widget _buildPost(int id,String postTitle,String image,String name, int numStar, int numCmt ,bool? liked, context){
+    return Padding(
+        padding:
+        const EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
+        child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => PostDetailScreen(
+                    id: id,
+                    postTitle: postTitle,
+                    image: image,
+                    name: name,
+                    numStar: numStar,
+                    numCmt: numCmt,
+                    liked: liked,)));
+            },
+            child: const Text('View more',
+              style: TextStyle(color: AppTheme.greenPrimary, fontSize: 14),)));
+  }
+
   List<ThePost> post = [ // list message demo
-    ThePost(postId: '1',postContent: "日本では国民的な知名度があり、登場キャラクタ...", postTitle: 'ドラえもん',avatar: 'assets/images/anna.png',name: 'Anna',star: 397,cmt: '41', liked: true),
-    ThePost(postId: '2',postContent: "向けSF漫画。1969年から小学館の雑誌で連載された。日本では国...", postTitle: 'ネコ（猫）',avatar: 'assets/images/yamada.png',name: 'Yamada',star: 72,cmt: '18',liked: false),
-    ThePost(postId: '3',postContent: "「おかずは、気持ちがあれば何でもかまいません。」 しんこ ...", postTitle: '戯け話',avatar: 'assets/images/robin.png',name: 'Robin',star: 1002,cmt: '332',liked: true),
-    ThePost(postId: '4',postContent: "私は恐れていました。 するとすぐに別の子供が「私も」と言いました。···", postTitle: '短い足',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: 21,cmt: '10',liked: false),
-    ThePost(postId: '5',postContent: "中学生の運動会の話。4人でも200メートルや80メートル走ろう ...", postTitle: '短い足',avatar: 'assets/images/anna.png',name: 'Anna',star: 133,cmt: '13',liked: false),
-    ThePost(postId: '6',postContent: "夫は妻に、私たちが新婚の朝に寝坊したので、お弁当を急いで作っ ...", postTitle: '戯け話',avatar: 'assets/images/yamada.png',name: 'Yamada',star: 55,cmt: '12',liked: true),
-    ThePost(postId: '7',postContent: "ブレインストーミング（英: brainstorming）あるいはブレイ ...", postTitle: 'ブレインストーミング',avatar: 'assets/images/robin.png',name: 'Robin',star: 887,cmt: '54',liked: true),
-    ThePost(postId: '8',postContent: "ネコ（猫）は、狭義には食肉目ネコ科ネコ属に分類されるリビアヤ ...", postTitle: 'ネコ（猫）',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: 121,cmt: '23',liked: false),
-    ThePost(postId: '9',postContent: "『ドラえもん』は、藤子・F・不二雄による日本の児童向けSF漫画。...", postTitle: 'ドラえもん',avatar: 'assets/images/anna.png',name: 'Anna',star: 434,cmt: '46',liked: true),
+    ThePost(postId: 0,postContent: "日本では国民的な知名度があり、登場キャラクタ...", postTitle: 'ドラえもん',avatar: 'assets/images/anna.png',name: 'Anna',star: 397,cmt: 41, liked: true),
+    ThePost(postId: 1,postContent: "向けSF漫画。1969年から小学館の雑誌で連載された。日本では国...", postTitle: 'ネコ（猫）',avatar: 'assets/images/yamada.png',name: 'Yamada',star: 72,cmt: 18,liked: false),
+    ThePost(postId: 2,postContent: "ケシ（芥子、罌粟、Opium poppy、学名 Papaver somniferum）...", postTitle: 'ケシ',avatar: 'assets/images/robin.png',name: 'Robin',star: 1002,cmt: 332,liked: true),
+    ThePost(postId: 3,postContent: "アキノノゲシ（秋の野芥子、秋の野罌粟、学名: Lactuca indica）···", postTitle: 'アキノノゲシ',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: 21,cmt: 10,liked: false),
+    ThePost(postId: 4,postContent: "周期表（しゅうきひょう、英: periodic table）は ...", postTitle: '周期表',avatar: 'assets/images/anna.png',name: 'Anna',star: 133,cmt: 13,liked: false),
+    ThePost(postId: 5,postContent: "Apple Inc.（アップル）は、アメリカ合衆国の多国籍テクノ ...", postTitle: 'Apple Inc.',avatar: 'assets/images/yamada.png',name: 'Yamada',star: 55,cmt: 12,liked: true),
+    ThePost(postId: 6,postContent: "サムスングループ（朝: 삼성그룹; 英: Samsung Group) ...", postTitle: 'サムスングループ',avatar: 'assets/images/robin.png',name: 'Robin',star: 887,cmt: 54,liked: true),
+    ThePost(postId: 7,postContent: "テイラー・アリソン・スウィフト（Taylor Alison Swift、1989年12月13日 - ）は ...", postTitle: 'Taylor Swift',avatar: 'assets/images/shizuka.png',name: 'Minamoto Shizuka',star: 121,cmt: 23,liked: false),
+    ThePost(postId: 8,postContent: "ハロン湾（下竜湾、ハロンわん、ベトナム語：Vịnh Hạ Long / 泳下龍）は ...", postTitle: 'Ha Long Bay',avatar: 'assets/images/anna.png',name: 'Anna',star: 434,cmt: 46,liked: true),
   ];
   List<TheStory> story = [ // list message demo
     TheStory(storyId: '1',author: 'Tetsuko Kuroyanagi',storyTitle: "窓ぎわのトットちゃん", titleE: '(Totto-Chan: The little girl at the window)',avatar: 'assets/images/yamada.png',name: 'Yamada',star: 456,cmt: '198', liked: true, unlocked: true),
@@ -445,13 +457,13 @@ class _HomePageScreenState extends State<HomePageScreen>
     TheStory(storyId: '10',author: 'Haruki Murakami',storyTitle: "1Q84", titleE: '1Q84',avatar: 'assets/images/yamada.png',name: 'Yamada',star: 321,cmt: '40', liked: false, unlocked: false),];
 }
 class ThePost{ //component dor chat message demo
-  String postId;
+  int postId;
   String postContent;
   String postTitle;
   String avatar;
   String name;
   int star;
-  String cmt;
+  int cmt;
   bool liked;
   ThePost({required this.postId,required this.postContent, required this.postTitle,required this.avatar,required this.name,required this.star,required this.cmt,required this.liked});
 }
